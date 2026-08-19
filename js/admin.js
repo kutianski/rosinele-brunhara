@@ -348,9 +348,11 @@ const Admin = {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (e) => {
-      input.value = e.target.result;
+      const container = input.closest('.image-upload');
+      const hiddenInput = container ? container.querySelector('input[type="hidden"]') : null;
+      if (hiddenInput) hiddenInput.value = e.target.result;
       const preview = document.getElementById('main-image-preview');
-      preview.innerHTML = `<img class="image-preview-small" src="${e.target.result}" alt="">`;
+      if (preview) preview.innerHTML = `<img class="image-preview-small" src="${e.target.result}" alt="">`;
     };
     reader.readAsDataURL(file);
   },
