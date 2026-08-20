@@ -617,7 +617,7 @@ const Admin = {
               <input type="file" accept="image/*" onchange="Admin.handleHomepageImage(event, 'heroImage')">
               <div class="image-upload-icon">&#128247;</div>
               <p>Clique para adicionar imagem de fundo</p>
-              <input type="hidden" id="hero-image" value="${hp.heroImage || ''}">
+              <input type="hidden" id="heroImage" value="${hp.heroImage || ''}">
             </div>
             ${hp.heroImage ? `<img class="image-preview" src="${hp.heroImage}" alt="">` : ''}
           </div>
@@ -689,7 +689,7 @@ const Admin = {
               <input type="file" accept="image/*" onchange="Admin.handleHomepageImage(event, 'aboutPreviewImage')">
               <div class="image-upload-icon">&#128247;</div>
               <p>Clique para adicionar imagem</p>
-              <input type="hidden" id="about-preview-image" value="${hp.aboutPreviewImage || ''}">
+              <input type="hidden" id="aboutPreviewImage" value="${hp.aboutPreviewImage || ''}">
             </div>
             ${hp.aboutPreviewImage ? `<img class="image-preview-small" src="${hp.aboutPreviewImage}" alt="">` : ''}
           </div>
@@ -889,7 +889,7 @@ const Admin = {
     hp.heroSubtitle = document.getElementById('hero-subtitle').value;
     hp.heroTitle = document.getElementById('hero-title').value;
     hp.heroText = document.getElementById('hero-text').value;
-    hp.heroImage = document.getElementById('hero-image').value;
+    hp.heroImage = document.getElementById('heroImage').value;
     hp.heroBtn1Text = document.getElementById('hero-btn1-text').value;
     hp.heroBtn1Link = document.getElementById('hero-btn1-link').value;
     hp.heroBtn2Text = document.getElementById('hero-btn2-text').value;
@@ -910,7 +910,7 @@ const Admin = {
     const hp = DB.getHomepage();
     hp.aboutPreviewTitle = document.getElementById('about-preview-title').value;
     hp.aboutPreviewText = document.getElementById('about-preview-text').value;
-    hp.aboutPreviewImage = document.getElementById('about-preview-image').value;
+    hp.aboutPreviewImage = document.getElementById('aboutPreviewImage').value;
     hp.aboutPreviewBtnText = document.getElementById('about-preview-btn').value;
     DB.saveHomepage(hp);
     this.toast('Prévia sobre salva!');
