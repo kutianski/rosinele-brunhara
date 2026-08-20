@@ -178,10 +178,12 @@ const PublicSite = {
 
   renderHero(hp) {
     const bgStyle = hp.heroImage ? `background-image:url('${hp.heroImage}')` : '';
+    const logoHtml = hp.logo && hp.showLogoInHero !== false ? `<img src="${hp.logo}" alt="" style="width:${hp.logoSize || 120}px;margin:0 auto 24px;display:block;">` : '';
     return `
       <section class="hero">
         <div class="hero-bg" style="${bgStyle}"></div>
         <div class="hero-content fade-in">
+          ${logoHtml}
           <p class="hero-subtitle">${hp.heroSubtitle || ''}</p>
           <h1>${hp.heroTitle || ''}</h1>
           <p>${hp.heroText || ''}</p>

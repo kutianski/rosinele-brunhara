@@ -562,6 +562,36 @@ const Admin = {
     this.content.innerHTML = `
       <div class="admin-panel">
         <div class="panel-header">
+          <h3>Logo / Imagem da Marca</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="form-label">Logo ou Imagem</label>
+            <div class="image-upload">
+              <input type="file" accept="image/*" onchange="Admin.handleHomepageImage(event, 'logo-image')">
+              <div class="image-upload-icon">&#128247;</div>
+              <p>Clique para adicionar logo ou imagem</p>
+              <input type="hidden" id="logo-image" value="${hp.logo || ''}">
+            </div>
+            ${hp.logo ? `<img class="image-preview-small" src="${hp.logo}" alt="" style="max-width:${hp.logoSize || 120}px;">` : ''}
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tamanho da Imagem (px)</label>
+            <input class="form-input" id="logo-size" type="number" min="20" max="500" value="${hp.logoSize || 120}">
+            <p class="form-help">Largura da imagem em pixels.</p>
+          </div>
+          <div class="form-group">
+            <label class="form-checkbox">
+              <input type="checkbox" id="show-logo-hero" ${hp.showLogoInHero !== false ? 'checked' : ''}>
+              Exibir no banner principal (Hero)
+            </label>
+          </div>
+          <button class="btn-admin btn-admin-primary" onclick="Admin.saveLogo()">Salvar Logo</button>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="panel-header">
           <h3>Banner Principal (Hero)</h3>
           <label class="form-checkbox" style="margin:0;">
             <input type="checkbox" id="hero-enabled" ${hp.heroEnabled !== false ? 'checked' : ''} onchange="Admin.toggleHero()">
@@ -745,8 +775,28 @@ const Admin = {
     const reader = new FileReader();
     reader.onload = (e) => {
       document.getElementById(field).value = e.target.result;
+      const container = event.target.closest('.image-upload').parentElement;
+      let preview = container.querySelector('.image-preview, .image-preview-small');
+      if (preview) {
+        preview.src = e.target.result;
+      } else {
+        preview = document.createElement('img');
+        preview.className = 'image-preview-small';
+        preview.src = e.target.result;
+        preview.alt = '';
+        container.appendChild(preview);
+      }
     };
     reader.readAsDataURL(file);
+  },
+
+  saveLogo() {
+    const hp = DB.getHomepage();
+    hp.logo = document.getElementById('logo-image').value;
+    hp.logoSize = parseInt(document.getElementById('logo-size').value) || 120;
+    hp.showLogoInHero = document.getElementById('show-logo-hero').checked;
+    DB.saveHomepage(hp);
+    this.toast('Logo salva!');
   },
 
   toggleHero() {

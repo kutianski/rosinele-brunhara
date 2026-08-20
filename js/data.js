@@ -95,7 +95,10 @@ const DB = {
       contactPreviewText: 'Tem alguma dúvida ou quer encomendar uma peça personalizada? Fale conosco!',
       contactPreviewBtnText: 'Fale Conosco',
       catalogEmptyMessage: 'Nosso catálogo está sendo preparado. Em breve você verá aqui nossas criações artesanais.',
-      catalogEmptyTitle: 'Catálogo em breve'
+      catalogEmptyTitle: 'Catálogo em breve',
+      logo: '',
+      logoSize: 120,
+      showLogoInHero: true
     };
   },
 
